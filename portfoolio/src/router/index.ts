@@ -7,7 +7,8 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      // @ts-ignore
+      component: () => import('../views/Fish.vue')
     },
     {
       path: '/about',
