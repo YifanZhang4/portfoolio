@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Tank</h1>
+    <h1>Linkedin</h1>
     <div id="tank">
       <SockeyeSalmon v-if="tankDim" :dim="tankDim"></SockeyeSalmon>
     </div>
