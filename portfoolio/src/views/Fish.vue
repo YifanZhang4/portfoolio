@@ -1,28 +1,35 @@
 <template>
   <div>
     <h1>Tank</h1>
-    <div id="tank" ref="tank">
-      <SockeyeSalmon></SockeyeSalmon>
+    <div id="tank">
+      <SockeyeSalmon v-if="tankDim" :dim="tankDim"></SockeyeSalmon>
     </div>
   </div>
 </template>
 
 <script setup>
 import SockeyeSalmon from '@/components/SockeyeSalmon.vue'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watchEffect } from 'vue'
 
-const tankHeight = ref(0)
-const tankWidth = ref(0)
+const tankDim = ref(null)
 
 function getMeasurements() {
-  console.log('oi')
-  tankHeight.value = tank.clientHeight
-  tankWidth.value = tank.clientWidth
-  console.log(tankWidth.value, tankHeight.value)
+  const tank = document.getElementById('tank')
+  if (tank) {
+    tankDim.value = tank.getBoundingClientRect()
+    console.log(tankDim.value)
+  } else {
+    console.error()
+  }
+  console.log('ran')
+}
+
+onresize = () => {
+  getMeasurements()
 }
 
 onMounted(() => {
-  window.addEventListener('resize', getMeasurements())
+  getMeasurements()
 })
 </script>
 
