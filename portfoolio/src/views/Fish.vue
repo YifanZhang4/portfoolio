@@ -17,11 +17,9 @@ function getMeasurements() {
   const tank = document.getElementById('tank')
   if (tank) {
     tankDim.value = tank.getBoundingClientRect()
-    console.log(tankDim.value)
   } else {
     console.error()
   }
-  console.log('ran')
 }
 
 onresize = () => {
