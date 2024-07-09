@@ -4,32 +4,38 @@
       src="../assets/Sockeye_Salmon_Base.png"
       alt="Sockeye Salmon drawn in a pixel art style"
       id="salmon"
-      ref="salmon"
+      :ref="fish"
     />
   </div>
 </template>
 
 <script setup>
-import { onMounted, ref, watch, toRefs } from 'vue'
-import { gsap } from 'gsap'
+import { ref, toRefs, defineProps } from 'vue'
 
-const salmon = ref(null)
 const props = defineProps({ dim: Object })
 const { dim } = toRefs(props)
+const fish = ref(null)
 
-console.log(dim.value.left, dim.value.right)
+function random(min, max) {
+  return Math.floor(Math.random() * (max - min) + min)
+}
 
-const randomY = gsap.utils.random(Math.floor(dim.value.top), Math.floor(dim.value.bottom), true)
-const randomX = gsap.utils.random(Math.floor(dim.value.left), Math.floor(dim.value.right), true)
+function swimming() {
+  const fishDims = fish.value.getBoundingClientRect()
+  const x = random(0, props.dim.width - fishDims.width)
+  const y = random(0, props.dim.height - fishDims.height)
+  const move = Math.sqrt((y - fishDims.y) ** 2 + (x - fishDims.x) ** 2)
+  if (move < 300) {
+    swimming()
+    return
+  }
+  fish.style.transform = `scaleX(${x > fishDims.x ? -1 : 1})`
+  setTimeout(swimming, random(Math.max(move * 2, 500), move * 4))
+}
 
-onMounted(() => {
-  console.log(props.dim)
-  let tl = gsap.timeline({})
-  tl.to(salmon.value, {
-    y: randomY(),
-    x: randomX()
-  })
-})
+setTimeout(() => {
+  swimming()
+}, 3000)
 </script>
 
 <style scoped>

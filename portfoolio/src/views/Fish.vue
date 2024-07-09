@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import SockeyeSalmon from '@/components/SockeyeSalmon.vue'
+import SockeyeSalmon from '../components/SockeyeSalmon.vue'
 import { onMounted, ref, watchEffect } from 'vue'
 
 const tankDim = ref(null)
@@ -40,7 +40,7 @@ onMounted(() => {
   background-color: cornflowerblue;
   left: 0;
   right: 0;
-  height: 60%;
+  height: 100%;
   width: 100%;
   overflow: hidden;
 }
