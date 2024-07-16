@@ -1,0 +1,42 @@
+:root {
+  /*Site BG*/
+  --darker: #1a0c69;
+  --dark: #4f1b98;
+  --light: #b664ca;
+  --lighter: #fff5fa;
+
+  /*Typography*/
+  --font1: 'Dosis', sans-serif;
+  --font2: 'Alkia', sans-serif;
+  --h1: 3.815rem;
+  --h2: 3.052rem;
+  --h3: 2.441rem;
+  --h4: 1.953rem;
+  --h5: 1.563rem;
+  --h6: 1.25rem;
+  --p: 1rem;
+}
+
+.dark {
+  --primary: var(--dark);
+  --secondary: var(--light);
+  --suppd: var(--darker);
+  --suppl: var(--lighter);
+}
+
+.light {
+  --primary: var(--light);
+  --secondary: var(--dark);
+  --suppd: var(--darker);
+  --suppl: var(--lighter);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-align: center;
+  margin: 2rem;
+}
