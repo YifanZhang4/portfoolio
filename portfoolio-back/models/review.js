@@ -20,10 +20,12 @@ const reviewSchema = new Schema({
   played: {
     type: String,
   },
-  tags: {
-    type: Array,
-    required: "Please tag the game.",
-  },
+  tags: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Tag",
+    },
+  ],
 });
 
 reviewSchema.pre("save", function (next) {
@@ -34,3 +36,5 @@ reviewSchema.pre("save", function (next) {
   this.slug = slugify(this.name);
   next();
 });
+
+module.exports = mongoose.model("Revier", reviewSchema);

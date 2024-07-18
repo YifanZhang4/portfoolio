@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div v-for="review in reviews" :key="review">
+    <div v-for="review in reviews" :key="review" @click="closed = open">
       <div v-if="open" class="tab-open">
-        <h2>{{ review.name }}</h2>
+        <h3>{{ review.name }}</h3>
         <img :src="review.image" alt="" />
         <h4>Rating: {{ review.rating }}/10</h4>
         <h4>Review:</h4>
@@ -10,8 +10,8 @@
         <p>Last Played: {{ review.played }}</p>
       </div>
       <div v-if="closed" class="tab-closed">
-        <h2>{{ review.name }}</h2>
-        <h2>{{ review.rating }}/10</h2>
+        <h3>{{ review.name }}</h3>
+        <h3>{{ review.rating }}/10</h3>
       </div>
     </div>
   </div>
@@ -40,4 +40,16 @@ onMounted(() => {
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+@import url(../assets/variables.css);
+
+body {
+  background-color: var(--primary);
+}
+.tab-closed {
+  width: 30rem;
+  height: 4rem;
+  font-style: var(--text);
+  border-radius: 20px;
+}
+</style>
