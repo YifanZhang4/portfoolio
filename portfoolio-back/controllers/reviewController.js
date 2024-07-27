@@ -1,6 +1,4 @@
 const Review = require("../models/review");
-const path = require("path");
-const multer = require("multer");
 
 exports.reviewHome = async (req, res) => {
   try {

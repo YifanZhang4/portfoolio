@@ -5,7 +5,6 @@ const slugify = require("slugify");
 const reviewSchema = new Schema({
   name: {
     type: String,
-    trim: true,
     required: "Please name the game.",
   },
   slug: String,
@@ -20,10 +19,15 @@ const reviewSchema = new Schema({
   played: {
     type: String,
   },
+  slink: {
+    type: String,
+  },
+  ilink: {
+    type: String,
+  },
   tags: [
     {
-      type: Schema.Types.ObjectId,
-      ref: "Tag",
+      type: String,
     },
   ],
 });
@@ -37,4 +41,4 @@ reviewSchema.pre("save", function (next) {
   next();
 });
 
-module.exports = mongoose.model("Revier", reviewSchema);
+module.exports = mongoose.model("Review", reviewSchema);

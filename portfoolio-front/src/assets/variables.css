@@ -2,10 +2,10 @@
   /*Site BG*/
   --darkest: #35276b;
   --darker: #453975;
-  --dark: #5b54b2;
   --light: #b4a2dd;
   --lightish: #cdc3e2;
   --lighter: #e4dff6;
+  
 
   /*Typography*/
   --font1: 'Dosis', sans-serif;
@@ -16,21 +16,24 @@
   --h4: 1.953rem;
   --h5: 1.563rem;
   --h6: 1.25rem;
-  --p: 1rem;
+  --p: 0.875rem;
+  --text-color: #35276b;
 }
 
 .dark {
-  --text: var(--darkest);
   --back: var(--darker);
   --front: var(--light);
   --fronter: var(--lighter);
+  --steam: #d1d8ff;
+  --itch: #ffd5d5;
 }
 
 .light {
-  --text: var(--darker);
   --back: var(--light);
   --front: var(--lighter);
   --fronter: var(--lightish);
+  --steam: #c0c5df;
+  --itch: #e7c6c6;
 }
 
 h1,
@@ -39,6 +42,5 @@ h3,
 h4,
 h5,
 h6 {
-  text-align: center;
   margin: 2rem;
 }
