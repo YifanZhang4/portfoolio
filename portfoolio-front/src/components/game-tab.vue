@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div @click="closed = open">
-      <div v-if="open" class="tab-open">
+    <div @click="open()" v-for="review in reviews" :key="review">
+      <div class="tab-open">
         <h3>{{ review.name }}</h3>
         <img :src="review.image" alt="" />
         <h4>Rating: {{ review.rating }}/10</h4>
@@ -24,7 +24,7 @@
         </div>
         <p>Last Played: {{ review.played }}</p>
       </div>
-      <div v-if="closed" class="tab-closed">
+      <div class="tab-closed">
         <h3>{{ review.name }}</h3>
         <h3>{{ review.rating }}/10</h3>
       </div>
@@ -32,10 +32,13 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { onMounted, ref } from 'vue'
+import { gsap } from 'gsap'
 
 const reviews = ref([])
+
+const open = (tab) => {}
 
 const getDecks = async () => {
   try {
@@ -53,9 +56,12 @@ const getDecks = async () => {
 onMounted(() => {
   getDecks()
 })
+
+const tl = gsap.timeline({})
+tl.to(".tab-closed", {height:30rem, duration: 1})
 </script>
 
-<style scoped>
+<style>
 @import url(../assets/variables.css);
 
 body {
@@ -80,15 +86,17 @@ h6 {
 p {
   font-size: var(--p);
 }
-.tab-closed {
-  width: 30rem;
-  height: 33rem;
-  font-style: var(--text);
-  border-radius: 20px;
-}
 .tab-open {
   width: 30rem;
-  height: 8rem;
+  height: 30rem;
+  font-style: var(--text);
+  border-radius: 20px;
+  display: none;
+}
+.tab-closed {
+  width: 30rem;
+  height: 4rem;
+  display: block;
 }
 .steam,
 .itch,
@@ -105,5 +113,22 @@ p {
 }
 .tag {
   color: var(--fronter);
+}
+
+@keyframes expand {
+  0% {
+    height: 4rem;
+  }
+  100% {
+    height: 30rem;
+  }
+}
+@keyframes unexpand {
+  0% {
+    height: 30rem;
+  }
+  100% {
+    height: 4rem;
+  }
 }
 </style>

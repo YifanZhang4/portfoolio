@@ -2,12 +2,12 @@
 <template>
   <div>
     <div id="reviewContain">
-      <GameTab v-for="review in reviews" :key="review"></GameTab>
+      <GameTab></GameTab>
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { onMounted, ref } from 'vue'
 import GameTab from '../components/game-tab.vue'
 
