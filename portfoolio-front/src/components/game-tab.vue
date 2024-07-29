@@ -1,14 +1,14 @@
 <template>
   <div>
-    <div @click="open()" v-for="review in reviews" :key="review">
-      <div class="tab-open">
-        <h3>{{ review.name }}</h3>
-        <img :src="review.image" alt="" />
-        <h4>Rating: {{ review.rating }}/10</h4>
-        <h4>Review:</h4>
-        <h6>{{ review.review }}</h6>
-        <h4>Links:</h4>
-        <div>
+    <div v-for="review in reviews" :key="review" class="dark">
+      <div class="tab-open" v-if="open" @click="close()">
+        <h4>{{ review.name }}</h4>
+        <img :src="review.image" alt="" class="image" />
+        <h5>Rating: {{ review.rating }}/10</h5>
+        <h5>Review:</h5>
+        <p>{{ review.review }}</p>
+        <h5>Links:</h5>
+        <div class="buttons">
           <div class="steam" v-if="review.slink">
             <button :href="review.slink">Steam</button>
           </div>
@@ -16,15 +16,15 @@
             <button :href="review.ilink">Itch.io</button>
           </div>
         </div>
-        <h4>Tags:</h4>
-        <div>
-          <div v-for="tag in review.tags" :key="tag" class="tag">
+        <h5>Tags:</h5>
+        <div class="tagsContain">
+          <div v-for="tag in reviews.tags" :key="tag" class="tag">
             {{ review.tag }}
           </div>
         </div>
         <p>Last Played: {{ review.played }}</p>
       </div>
-      <div class="tab-closed">
+      <div class="tab-closed" v-if="!open" @click="open()">
         <h3>{{ review.name }}</h3>
         <h3>{{ review.rating }}/10</h3>
       </div>
@@ -38,7 +38,13 @@ import { gsap } from 'gsap'
 
 const reviews = ref([])
 
-const open = (tab) => {}
+const open = (tab) => {
+  let open = false
+}
+
+const close = (tab) => {
+  let open = true
+}
 
 const getDecks = async () => {
   try {
@@ -56,9 +62,6 @@ const getDecks = async () => {
 onMounted(() => {
   getDecks()
 })
-
-const tl = gsap.timeline({})
-tl.to(".tab-closed", {height:30rem, duration: 1})
 </script>
 
 <style>
@@ -67,36 +70,26 @@ tl.to(".tab-closed", {height:30rem, duration: 1})
 body {
   background-color: var(--primary);
 }
-h3,
-h4,
-h6,
-p {
-  color: var(--text-color);
-}
-h3 {
-  font-size: var(--h3);
-}
-h4 {
-  font-size: var(--h4);
-}
-h6 {
-  font-size: var(--h6);
-  text-align: center;
-}
-p {
-  font-size: var(--p);
-}
 .tab-open {
   width: 30rem;
-  height: 30rem;
+  height: auto;
   font-style: var(--text);
   border-radius: 20px;
-  display: none;
+  background-color: var(--front);
+  text-align: left;
+  padding: 0.5rem;
+}
+.image {
+  display: block;
+  height: 10rem;
+  width: auto;
+  border-radius: 20px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .tab-closed {
   width: 30rem;
   height: 4rem;
-  display: block;
 }
 .steam,
 .itch,
@@ -104,12 +97,20 @@ p {
   width: 7.5rem;
   height: 2rem;
   text-align: center;
+  color: var(--text-color);
+  border: none;
+  border-radius: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.buttons {
+  display: flex;
 }
 .steam {
-  color: var(--steam);
+  background-color: var(--steam);
 }
 .itch {
-  color: var(--itch);
+  background-color: var(--itch);
 }
 .tag {
   color: var(--fronter);
