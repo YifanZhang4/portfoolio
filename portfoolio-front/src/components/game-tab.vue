@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-for="review in reviews" :key="review" class="dark">
-      <div class="tab-open" v-if="open" @click="close()">
+      <div class="tab">
         <h4>{{ review.name }}</h4>
         <img :src="review.image" alt="" class="image" />
         <h5>Rating: {{ review.rating }}/10</h5>
@@ -9,12 +9,8 @@
         <p>{{ review.review }}</p>
         <h5>Links:</h5>
         <div class="buttons">
-          <div class="steam" v-if="review.slink">
-            <button :href="review.slink">Steam</button>
-          </div>
-          <div class="itch" v-if="review.ilink">
-            <button :href="review.ilink">Itch.io</button>
-          </div>
+          <button :href="review.slink" class="steam" v-if="review.slink">Steam</button>
+          <button :href="review.ilink" class="itch" v-if="review.ilink">Itch.io</button>
         </div>
         <h5>Tags:</h5>
         <div class="tagsContain">
@@ -24,27 +20,14 @@
         </div>
         <p>Last Played: {{ review.played }}</p>
       </div>
-      <div class="tab-closed" v-if="!open" @click="open()">
-        <h3>{{ review.name }}</h3>
-        <h3>{{ review.rating }}/10</h3>
-      </div>
     </div>
   </div>
 </template>
 
 <script setup>
 import { onMounted, ref } from 'vue'
-import { gsap } from 'gsap'
 
 const reviews = ref([])
-
-const open = (tab) => {
-  let open = false
-}
-
-const close = (tab) => {
-  let open = true
-}
 
 const getDecks = async () => {
   try {
@@ -70,7 +53,7 @@ onMounted(() => {
 body {
   background-color: var(--primary);
 }
-.tab-open {
+.tab {
   width: 30rem;
   height: auto;
   font-style: var(--text);
@@ -87,10 +70,7 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
-.tab-closed {
-  width: 30rem;
-  height: 4rem;
-}
+
 .steam,
 .itch,
 .tag {
@@ -114,22 +94,5 @@ body {
 }
 .tag {
   color: var(--fronter);
-}
-
-@keyframes expand {
-  0% {
-    height: 4rem;
-  }
-  100% {
-    height: 30rem;
-  }
-}
-@keyframes unexpand {
-  0% {
-    height: 30rem;
-  }
-  100% {
-    height: 4rem;
-  }
 }
 </style>
