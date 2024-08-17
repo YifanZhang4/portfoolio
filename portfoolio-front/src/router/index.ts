@@ -1,8 +1,7 @@
-// @ts-ignore
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import GameView from '../views/GameView.vue'
-import PastView  from '@/views/PastView.vue'
+import PastView from '../views/PastView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -18,8 +17,8 @@ const router = createRouter({
       component: GameView
     },
     {
-      path: '/past',
-      name: 'past',
+      path: '/projects',
+      name: 'projects',
       component: PastView
     }
   ]

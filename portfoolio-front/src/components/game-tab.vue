@@ -47,7 +47,7 @@ onMounted(() => {
 })
 </script>
 
-<style>
+<style scoped>
 @import url(../assets/variables.css);
 
 body {
