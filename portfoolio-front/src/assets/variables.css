@@ -45,14 +45,16 @@ p {
   --back: var(--darker);
   --front: var(--light);
   --fronter: var(--lighter);
+  --text: var(--text-color);
   --steam: #d1d8ff;
   --itch: #ffd5d5;
 }
 
 .light {
-  --back: var(--light);
-  --front: var(--lighter);
+  --back: var(--lighter);
+  --front: var(--light);
   --fronter: var(--lightish);
+  --text: var(--text-color);
   --steam: #c0c5df;
   --itch: #e7c6c6;
 }

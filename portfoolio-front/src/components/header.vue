@@ -1,67 +1,79 @@
 <template>
-  <div>
-    <Menubar :model="items">
-      <template #start>
-        <svg
-          width="35"
-          height="40"
-          viewBox="0 0 35 40"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-8"
+  <div id="navbar">
+    <div id="logoContainer">
+      <NuxtLink to="/" @click="page = 'index'">
+        <img class="logo" src="" alt="" />
+      </NuxtLink>
+    </div>
+
+    <div id="navLinks">
+      <div class="nav-item" v-for="(link, index) in navItems" :key="index">
+        <NuxtLink
+          :to="link.to"
+          :id="link.id"
+          @click="page = link.page"
+          v-bind:style="{ animation: fadeIn }"
         >
-          <path d="..." fill="var(--p-primary-color)" />
-          <path d="..." fill="var(--p-text-color)" />
-        </svg>
-      </template>
-      <template #item="{ item, props, hasSubmenu, root }">
-        <a v-ripple class="flex items-center" v-bind="props.action">
-          <span :class="item.icon" />
-          <span class="ml-2">{{ item.label }}</span>
-          <Badge
-            v-if="item.badge"
-            :class="{ 'ml-auto': !root, 'ml-2': root }"
-            :value="item.badge"
-          />
-          <span
-            v-if="item.shortcut"
-            class="ml-auto border border-surface rounded bg-emphasis text-muted-color text-xs p-1"
-            >{{ item.shortcut }}</span
-          >
-          <i
-            v-if="hasSubmenu"
-            :class="[
-              'pi pi-angle-down',
-              { 'pi-angle-down ml-2': root, 'pi-angle-right ml-auto': !root }
-            ]"
-          ></i>
-        </a>
-      </template>
-      <template #end>
-        <div class="flex items-center gap-2">
-          <InputText placeholder="Search" type="text" class="w-32 sm:w-auto" />
-          <Avatar image="/images/avatar/amyelsner.png" shape="circle" />
-        </div>
-      </template>
-    </Menubar>
+          <img class="icon" :src="link.icon" :alt="link.alt" />
+          <span>{{ link.text }}</span>
+        </NuxtLink>
+      </div>
+    </div>
+
+    <Menu />
   </div>
 </template>
 
 <script setup>
-import Menubar from 'primevue/menubar'
+import { ref } from 'vue'
 
-const items = [
+const page = ref('')
+const navItems = [
   {
+    to: '/',
+    id: 'homeLink',
     icon: '../assets/homeL.svg',
-    label: 'Home'
+    alt: 'Black pixel icon of a house',
+    text: 'Home',
+    page: 'index'
   }
 ]
+
+const fadeIn = ref('fadeIn 0.5s ease-in-out forwards')
 </script>
 
 <style scoped>
 @import url(../assets/variables.css);
 
-#header {
+#navLinks {
   display: flex;
+  gap: 10px;
+}
+
+.nav-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.icon {
+  height: 24px;
+  padding: 0 5px 0 0;
+}
+
+.group {
+  display: flex;
+  align-items: center;
+  width: auto;
+  margin-top: 1.5rem;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 </style>
